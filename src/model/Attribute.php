@@ -6,10 +6,15 @@ use SilverStripe\ORM\DataObject;
 
 class Attribute extends DataObject
 {
-
   private static $db = [
     'Key' => 'Varchar',
     'Title' => 'Varchar',
+    'Type' => 'Enum(array("Numerical","Text"), "Text")',
+    'Localized' => 'Boolean'
+  ];
+
+  private static $owns = [
+    'Values',
   ];
 
   private static $has_many = [
@@ -19,4 +24,11 @@ class Attribute extends DataObject
   private static $belongs_many_many = [
     "AttributeSets" => AttributeSet::class,
   ];
+
+  public function getCMSFields()
+  {
+    $fields = parent::getCMSFields();
+    $fields->removeByName('Key');
+    return $fields;
+  }
 }

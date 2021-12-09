@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  db:
+    image: mysql:5.7
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - "mysql-data:/var/lib/mysql"
+    ports:
+      - 4306:3306
+  app:
+    build: .
+    depends_on:
+      - db
+    image: knirb/silverstripe:php7.4.16-apache
+    platform: linux/amd64
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 8080:80
+  mailhog:
+    image: mailhog/mailhog:latest
+    restart: always
+    ports:
+      - 1025:1025
+      - 8025:8025
+
+volumes:
+  mysql-data:
