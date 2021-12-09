@@ -1,5 +1,6 @@
 <?php
 
+namespace NorthCreationAgency\DynamicAttributes;
 
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Forms\FieldList;
@@ -22,9 +23,9 @@ class AttributeHolder extends DataObject
 
   public function getAttributes()
   {
-    $set = $this->owner->AttributeSet();
+    $set = $this->AttributeSet();
     $attributes = $set->Attributes();
-    $values = $attributes->Values()->filter(['OwnerID' => $this->owner->ID]);
+    $values = $attributes->Values()->filter(['OwnerID' => $this->ID]);
     return $values;
   }
 }
