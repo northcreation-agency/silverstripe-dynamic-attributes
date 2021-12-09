@@ -1,6 +1,5 @@
 <?php
 
-
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 
@@ -24,7 +23,7 @@ class AttributeExtension extends DataExtension
   {
     $set = $this->owner->AttributeSet();
     $attributes = $set->Attributes();
-    $values = $attributes->Values()->filter(['OwnerID' => $this->owner->ID]);
+    $values = $attributes->Values()->filter(['AttributeOwnerID' => $this->owner->ID]);
     return $values;
   }
 }
