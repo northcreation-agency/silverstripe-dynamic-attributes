@@ -14,7 +14,6 @@ class AttributeValue extends DataObject
 
   private static $has_one = [
     'Attribute' => Attribute::class,
-    'AttributeOwner' => DataObject::class,
   ];
 
   public function isLocalized()

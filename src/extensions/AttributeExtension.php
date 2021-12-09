@@ -5,6 +5,7 @@ use SilverStripe\ORM\DataExtension;
 
 class AttributeExtension extends DataExtension
 {
+
   private static $has_one = [
     'AttributeSet' => AttributeSet::class,
   ];
@@ -23,7 +24,7 @@ class AttributeExtension extends DataExtension
   {
     $set = $this->owner->AttributeSet();
     $attributes = $set->Attributes();
-    $values = $attributes->Values()->filter(['AttributeOwnerID' => $this->owner->ID]);
+    $values = $attributes->Values()->filter(['OwnerItemID' => $this->owner->ID]);
     return $values;
   }
 }

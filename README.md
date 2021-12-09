@@ -20,9 +20,13 @@ class MyClass extends AttributeHolder
 or by extension, simply add this to your yml-config
 
 ```
-MyObject:
+NorthCreationAgency\DynamicAttributes\AttributeValue:
+  has_one:
+    OwnerItem: MyClass
+
+MyClass:
   extensions:
-    - 'NortNorthCreationAgency\DynamicAttributes\AttributeExtension'
+    - 'NorthCreationAgency\DynamicAttributes\AttributeExtension'
 ```
 
 ## Usage
