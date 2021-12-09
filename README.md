@@ -9,7 +9,7 @@ We have added two ways to use the extension:
 By extending the AttributeHolder class
 
 ```
-use NorthCreationAgency\AttributeHolder;
+use NorthCreationAgency\DynamicAttributes\AttributeHolder;
 
 class MyClass extends AttributeHolder
 {
@@ -22,7 +22,7 @@ or by extension, simply add this to your yml-config
 ```
 MyObject:
   extensions:
-    - 'NortNorthCreationAgency\AttributeExtension'
+    - 'NortNorthCreationAgency\DynamicAttributes\AttributeExtension'
 ```
 
 ## Usage
