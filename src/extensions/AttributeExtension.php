@@ -13,7 +13,7 @@ class AttributeExtension extends DataExtension
   ];
 
   private static $has_many = [
-    'AttributeValues' => AttributeValues::class,
+    'AttributeValues' => AttributeValue::class,
   ];
 
   public function updateCMSFields(FieldList $fields)
