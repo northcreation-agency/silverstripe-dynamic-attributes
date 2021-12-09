@@ -1,3 +1,4 @@
 **/resources/**
 .env*
 **/vendor/**
+/log
