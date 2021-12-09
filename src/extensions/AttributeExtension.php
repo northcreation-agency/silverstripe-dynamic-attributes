@@ -1,5 +1,7 @@
 <?php
 
+namespace NorthCreationAgency\DynamicAttributes;
+
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 
