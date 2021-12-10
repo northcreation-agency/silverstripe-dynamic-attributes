@@ -1,15 +1,19 @@
 <?php
 
+
+
 namespace NorthCreationAgency\DynamicAttributes;
 
 use SilverStripe\ORM\DataObject;
+
+
 
 class Attribute extends DataObject
 {
   private static $db = [
     'Key' => 'Varchar',
     'Title' => 'Varchar',
-    'Type' => 'Enum(array("Numerical","Text"), "Text")',
+    'Type' => 'Enum(array("' . Types::Number . '","' . Types::Text . '"), "' . Types::Text . '")',
     'Localized' => 'Boolean'
   ];
 
