@@ -43,7 +43,7 @@ class AttributeValue extends DataObject
 
   public function setValue($value)
   {
-    $df = $this->isLocalized ? 'LocalizedValue' : 'Value';
+    $df = $this->isLocalized() ? 'LocalizedValue' : 'Value';
     $this->setField($df, $value);
   }
 
