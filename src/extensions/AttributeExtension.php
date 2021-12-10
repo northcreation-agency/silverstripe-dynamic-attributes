@@ -25,7 +25,7 @@ class AttributeExtension extends DataExtension
   public function getAttributes()
   {
     if (!$this->owner->AttributeSet()->exists()) {
-      return [];
+      return null;
     }
     $set = $this->owner->AttributeSet();
     $attributes = $set->Attributes();
