@@ -17,6 +17,11 @@ class AttributeValue extends DataObject
     'OwnerItem' => DataObject::class,
   ];
 
+  private static $summary_fields = [
+    'Attribute.Title' => 'Name',
+    'Value' => 'Value',
+  ];
+
   public function isLocalized()
   {
     return $this->Attribute()->exists() && $this->Attribute()->isLocalized();
@@ -25,13 +30,13 @@ class AttributeValue extends DataObject
   public function getCMSFields()
   {
     $fields = parent::getCMSFields();
-
+    $title = $this->Attribute()->exists() ? $this->Attribute()->Title : "Value";
     if ($this->isLocalized()) {
       $fields->removeByName('Value');
-      $fields->dataFieldByName("LocalizedValue")->setTitle(_t(__CLASS__ . 'ATTRIBUTEVALUE', 'Value'));
+      $fields->dataFieldByName("LocalizedValue")->setTitle($title);
     } else {
       $fields->removeByName('LocalizedValue');
-      $fields->dataFieldByName("Value")->setTitle(_t(__CLASS__ . 'ATTRIBUTEVALUE', 'Value'));
+      $fields->dataFieldByName("Value")->setTitle($title);
     }
     return $fields;
   }
