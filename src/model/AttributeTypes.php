@@ -2,7 +2,7 @@
 
 namespace NorthCreationAgency\DynamicAttributes;
 
-abstract class Types
+abstract class AttributeTypes
 {
   const Number = "Number";
   const Text = "Text";
