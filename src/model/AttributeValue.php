@@ -49,4 +49,13 @@ class AttributeValue extends DataObject
     }
     return $this->getField('Value');
   }
+
+  public static function findOrCreate(array $input)
+  {
+    $existing = AttributeValue::get()->filter($input)->first();
+    if ($existing) {
+      return $existing;
+    }
+    return AttributeValue::create($input);
+  }
 }

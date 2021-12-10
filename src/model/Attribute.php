@@ -31,4 +31,13 @@ class Attribute extends DataObject
     $fields->removeByName('Key');
     return $fields;
   }
+
+  public static function findOrCreate(array $input)
+  {
+    $existing = Attribute::get()->filter($input)->first();
+    if ($existing) {
+      return $existing;
+    }
+    return Attribute::create($input);
+  }
 }

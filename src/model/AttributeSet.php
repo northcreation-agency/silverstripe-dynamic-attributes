@@ -27,7 +27,18 @@ class AttributeSet extends DataObject
     $fields->removeByName('Key');
     $gf = $fields->dataFieldByName("Attributes");
     $gf->setConfig($cnf = GridFieldConfig_RecordEditor::create());
-    $cnf->addComponent(GridFieldOrderableRows::create());
+    if ($this->Attributes()->count() > 0) {
+      $cnf->addComponent(GridFieldOrderableRows::create('Sort'));
+    }
     return $fields;
+  }
+
+  public static function findOrCreate(array $input)
+  {
+    $existing = AttributeSet::get()->filter($input)->first();
+    if ($existing) {
+      return $existing;
+    }
+    return AttributeSet::create($input);
   }
 }
