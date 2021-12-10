@@ -24,9 +24,11 @@ class AttributeExtension extends DataExtension
 
   public function getAttributes()
   {
+    if (!$this->owner->AttributeSet()->exists()) {
+      return [];
+    }
     $set = $this->owner->AttributeSet();
     $attributes = $set->Attributes();
-    $values = $attributes->Values()->filter(['OwnerItemID' => $this->owner->ID]);
-    return $values;
+    return $attributes;
   }
 }
