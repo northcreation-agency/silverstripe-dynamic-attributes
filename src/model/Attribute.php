@@ -36,6 +36,11 @@ class Attribute extends DataObject
     return $fields;
   }
 
+  public function isLocalized()
+  {
+    return $this->Localized;
+  }
+
   public static function findOrCreate(array $input)
   {
     $existing = Attribute::get()->filter($input)->first();
