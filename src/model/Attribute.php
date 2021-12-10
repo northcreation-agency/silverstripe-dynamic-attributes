@@ -14,7 +14,12 @@ class Attribute extends DataObject
     'Key' => 'Varchar',
     'Title' => 'Varchar',
     'Type' => 'Enum(array("' . AttributeType::Number . '","' . AttributeType::Text . '"), "' . AttributeType::Text . '")',
-    'Localized' => 'Boolean'
+    'Localized' => 'Boolean',
+    'Active' => 'Boolean',
+  ];
+
+  private static $defaults = [
+    'Active' => 1
   ];
 
   private static $owns = [
