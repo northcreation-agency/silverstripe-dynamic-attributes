@@ -31,4 +31,19 @@ class AttributeExtension extends DataExtension
     $attributes = $set->Attributes();
     return $attributes;
   }
+
+  public function getSortedAttributeValues()
+  {
+    $attributeSet = $this->owner->AttributeSet();
+    $attributes = $this->owner->getAttributes();
+    if ($attributes) {
+      $attributeValues = $this->owner->getComponents("AttributeValues")
+        ->leftJoin("nca/Attribute", '"nca/AttributeValue"."AttributeID"="nca/Attribute"."ID"')
+        ->leftJoin("nca/AttributeSet_Attributes", '"nca/Attribute"."ID"="nca/AttributeSet_Attributes"."nca/AttributeID"')
+        ->where('"nca/AttributeSetID"=' . $attributeSet->ID . " AND Active=1 AND OwnerItemID=" . $this->owner->ID)
+        ->sort("Sort ASC");
+      return $attributeValues;
+    }
+    return null;
+  }
 }
