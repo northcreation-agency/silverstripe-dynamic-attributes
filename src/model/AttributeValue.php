@@ -7,7 +7,7 @@ use SilverStripe\ORM\DataObject;
 
 class AttributeValue extends DataObject
 {
-  private static $table_name = 'nca/AttributeValue';
+  private static $table_name = 'Nca_AttributeValue';
 
   private static $db = [
     'Value' => 'Text',

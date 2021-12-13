@@ -9,7 +9,7 @@ use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 
 class AttributeSet extends DataObject
 {
-  private static $table_name = 'nca/AttributeSet';
+  private static $table_name = 'Nca_AttributeSet';
 
   private static $db = [
     'Key' => 'Varchar',
