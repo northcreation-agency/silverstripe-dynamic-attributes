@@ -37,6 +37,10 @@ class Attribute extends DataObject
     "AttributeSets" => AttributeSet::class,
   ];
 
+  private static $summary_fields = [
+    'Active' => 'Active',
+  ];
+
   public function getCMSFields()
   {
     $fields = parent::getCMSFields();

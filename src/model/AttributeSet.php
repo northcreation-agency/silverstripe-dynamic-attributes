@@ -2,9 +2,10 @@
 
 namespace NorthCreationAgency\DynamicAttributes;
 
-use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\Forms\GridField\GridField;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 
 class AttributeSet extends DataObject
 {
@@ -27,8 +28,8 @@ class AttributeSet extends DataObject
   {
     $fields = parent::getCMSFields();
     $fields->removeByName('Key');
-    $gf = $fields->dataFieldByName("Attributes");
-    $gf->setConfig($cnf = GridFieldConfig_RecordEditor::create());
+    $fields->removeByName('Attributes');
+    $fields->addFieldToTab("Root.Main", new GridField("Attributes", "Attributes", $this->Attributes(), $cnf = GridFieldConfig_RecordEditor::create()));
     if ($this->Attributes()->count() > 0) {
       $cnf->addComponent(GridFieldOrderableRows::create('Sort'));
     }
