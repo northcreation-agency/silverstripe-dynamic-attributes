@@ -10,6 +10,9 @@ use SilverStripe\ORM\DataObject;
 
 class Attribute extends DataObject
 {
+  private static $table_name = 'nca/AttributeValue';
+
+
   private static $db = [
     'Key' => 'Varchar',
     'Title' => 'Varchar',
