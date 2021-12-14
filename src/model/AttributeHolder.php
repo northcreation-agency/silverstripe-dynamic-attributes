@@ -7,6 +7,9 @@ use SilverStripe\Forms\FieldList;
 
 class AttributeHolder extends DataObject
 {
+
+  private static $table_name = "Nca_AttributeHolder";
+
   private static $has_one = [
     'AttributeSet' => AttributeSet::class,
   ];
