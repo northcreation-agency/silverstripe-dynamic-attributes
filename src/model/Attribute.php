@@ -38,6 +38,7 @@ class Attribute extends DataObject
   ];
 
   private static $summary_fields = [
+    'Title' => 'Title',
     'Active' => 'Active',
   ];
 
