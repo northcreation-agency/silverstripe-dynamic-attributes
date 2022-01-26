@@ -1,3 +1,5 @@
 NorthCreationAgency\DynamicAttributes\AttributeValue:
+  extensions:
+    - 'TractorCow\Fluent\Extension\FluentExtension'
   translate:
     - "LocalizedValue"
