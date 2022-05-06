@@ -38,9 +38,9 @@ class AttributeExtension extends DataExtension
     $attributes = $this->owner->getAttributes();
     if ($attributes) {
       $attributeValues = $this->owner->getComponents("AttributeValues")
-        ->leftJoin("nca/Attribute", '"nca/AttributeValue"."AttributeID"="nca/Attribute"."ID"')
-        ->leftJoin("nca/AttributeSet_Attributes", '"nca/Attribute"."ID"="nca/AttributeSet_Attributes"."nca/AttributeID"')
-        ->where('"nca/AttributeSetID"=' . $attributeSet->ID . " AND Active=1 AND OwnerItemID=" . $this->owner->ID)
+        ->leftJoin("Nca_Attribute", '"Nca_AttributeValue"."AttributeID"="Nca_Attribute"."ID"')
+        ->leftJoin("Nca_AttributeSet_Attributes", '"Nca_Attribute"."ID"="Nca_AttributeSet_Attributes"."Nca_AttributeID"')
+        ->where('"Nca_AttributeSetID"=' . $attributeSet->ID . " AND Active=1 AND OwnerItemID=" . $this->owner->ID)
         ->sort("Sort ASC");
       return $attributeValues;
     }
