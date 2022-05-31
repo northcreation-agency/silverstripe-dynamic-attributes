@@ -79,7 +79,9 @@ class AttributeSet extends DataObject
         }
       ),
     ));
-    $cnf->addComponent(GridFieldOrderableRows::create('Sort'));
+    if ($this->Attributes()->count() > 0) {
+      $cnf->addComponent(GridFieldOrderableRows::create('Sort'));
+    }
     return $fields;
   }
 
