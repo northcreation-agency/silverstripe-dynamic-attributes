@@ -24,21 +24,6 @@ class AttributeSet extends DataObject
     ]
   ];
 
-
-
-  // private static $many_many_extraFields = [
-  //   'Attributes' => [
-  //     'Sort' => 'Int',
-  //     'Active' => 'Boolean'
-  //   ]
-  // ];
-
-  // private static $defaults = [
-  //   'Attributes' => [
-  //     'Active' => 1,
-  //   ],
-  // ];
-
   public function getCMSFields()
   {
     $fields = parent::getCMSFields();
