@@ -11,8 +11,11 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Forms\GridField\GridFieldEditButton;
+use SilverStripe\Forms\GridField\GridFieldPageCount;
+use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Forms\TextField;
 use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
+use Symbiote\GridFieldExtensions\GridFieldConfigurablePaginator;
 use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
 
 class AttributeSet extends DataObject
@@ -50,6 +53,12 @@ class AttributeSet extends DataObject
       new GridFieldAddNewInlineButton(),
       GridFieldAddExistingAutocompleter::class
     );
+
+    $cnf->removeComponentsByType(GridFieldPaginator::class);
+    $cnf->removeComponentsByType(GridFieldPageCount::class);
+    $paginator = new GridFieldConfigurablePaginator();
+    $paginator->setPageSizes([20, 50, 100]);
+    $cnf->addComponent($paginator);
 
     /** @var GridFieldEditableColumns */
     $columns = $cnf->getComponentByType(GridFieldEditableColumns::class);
