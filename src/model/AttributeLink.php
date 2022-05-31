@@ -6,6 +6,8 @@ use SilverStripe\ORM\DataObject;
 
 class AttributeLink extends DataObject
 {
+  private static $table_name = "Nca_AttributeLink";
+
   private static $db = [
     'Sort' => 'Int',
     'Active' => 'Boolean',
