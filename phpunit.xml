@@ -1,4 +1,9 @@
-<phpunit bootstrap="vendor/silverstripe/framework/tests/bootstrap.php" colors="true">
+<phpunit 
+    bootstrap="vendor/silverstripe/framework/tests/bootstrap.php" 
+    colors="true"
+    verbose="true"
+    stopOnFailure="false"
+>
     <testsuites>
         <testsuite name="Default">
             <directory>src/tests</directory>

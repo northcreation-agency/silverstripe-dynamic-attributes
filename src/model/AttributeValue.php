@@ -2,6 +2,7 @@
 
 namespace NorthCreationAgency\DynamicAttributes;
 
+use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\ORM\DataObject;
 
@@ -29,6 +30,11 @@ class AttributeValue extends DataObject
     return $this->Attribute()->exists() && $this->Attribute()->isLocalized();
   }
 
+  public function isNumerical()
+  {
+    return $this->Attribute->exists() && $this->Attribute->Type === AttributeType::Number;
+  }
+
   public function getCMSFields()
   {
     $fields = parent::getCMSFields();
@@ -51,9 +57,16 @@ class AttributeValue extends DataObject
 
   public function getValue()
   {
+    $value = $this->getValueBasedOnLocalization();
+    return $this->isNumerical() ? floatval($value) : $value;
+  }
+
+  public function getValueBasedOnLocalization()
+  {
     if ($this->isLocalized()) {
       return $this->LocalizedValue;
     }
+
     return $this->getField('Value');
   }
 
