@@ -5,11 +5,14 @@ namespace NorthCreationAgency\DynamicAttributes;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
+use SilverStripe\Forms\GridField\GridFieldAddNewButton;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Forms\GridField\GridFieldEditButton;
 use SilverStripe\Forms\TextField;
+use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
 use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
 
 class AttributeSet extends DataObject
@@ -36,40 +39,47 @@ class AttributeSet extends DataObject
     $fields->removeByName('Attributes');
     $fields->addFieldToTab("Root.Main", new GridField("Attributes", "Attributes", $this->Attributes(), $cnf = GridFieldConfig_RelationEditor::create()));
 
-    if ($this->Attributes()->count() > 0) {
-      $cnf->removeComponentsByType(GridFieldDataColumns::class);
-      $cnf->addComponent(new GridFieldEditableColumns(), GridFieldEditButton::class);
+    $cnf->removeComponentsByType(GridFieldDataColumns::class);
+    $cnf->removeComponentsByType(GridFieldAddNewButton::class);
 
-      /** @var GridFieldEditableColumns */
-      $columns = $cnf->getComponentByType(GridFieldEditableColumns::class);
-      $columns->setDisplayFields(array(
-        'Title' => array(
-          'title' => 'Title',
-          'callback' => function ($record, $column, $grid) {
-            return TextField::create($column);
-          }
-        ),
-        'Key' => array(
-          'title' => 'InRiver Field Key',
-          'callback' => function ($record, $column, $grid) {
-            return TextField::create($column);
-          }
-        ),
-        'Nca_AttributeLink_AttributeSet_Attribute.Sort' => array(
-          'title' => 'Sort Order',
-          'callback' => function ($record, $column, $grid) {
-            return TextField::create($column);
-          }
-        ),
-        'Nca_AttributeLink_AttributeSet_Attribute.Active' => array(
-          'title' => 'Active',
-          'callback' => function ($record, $column, $grid) {
-            return CheckboxField::create($column);
-          }
-        ),
-      ));
-      $cnf->addComponent(GridFieldOrderableRows::create('Sort'));
-    }
+    $cnf->addComponent(
+      new GridFieldEditableColumns(),
+      GridFieldEditButton::class
+    );
+    $cnf->addComponent(
+      new GridFieldAddNewInlineButton(),
+      GridFieldAddExistingAutocompleter::class
+    );
+
+    /** @var GridFieldEditableColumns */
+    $columns = $cnf->getComponentByType(GridFieldEditableColumns::class);
+    $columns->setDisplayFields(array(
+      'Title' => array(
+        'title' => 'Title',
+        'callback' => function ($record, $column, $grid) {
+          return TextField::create($column);
+        }
+      ),
+      'Key' => array(
+        'title' => 'InRiver Field Key',
+        'callback' => function ($record, $column, $grid) {
+          return TextField::create($column);
+        }
+      ),
+      'Nca_AttributeLink_AttributeSet_Attribute.Sort' => array(
+        'title' => 'Sort Order',
+        'callback' => function ($record, $column, $grid) {
+          return TextField::create($column);
+        }
+      ),
+      'Nca_AttributeLink_AttributeSet_Attribute.Active' => array(
+        'title' => 'Active',
+        'callback' => function ($record, $column, $grid) {
+          return CheckboxField::create($column);
+        }
+      ),
+    ));
+    $cnf->addComponent(GridFieldOrderableRows::create('Sort'));
     return $fields;
   }
 
