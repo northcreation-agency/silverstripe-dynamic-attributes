@@ -6,23 +6,15 @@ namespace NorthCreationAgency\DynamicAttributes;
 
 use SilverStripe\ORM\DataObject;
 
-
-
 class Attribute extends DataObject
 {
   private static $table_name = 'Nca_Attribute';
-
 
   private static $db = [
     'Key' => 'Varchar',
     'Title' => 'Varchar',
     'Type' => 'Enum(array("' . AttributeType::Number . '","' . AttributeType::Text . '"), "' . AttributeType::Text . '")',
     'Localized' => 'Boolean',
-    'Active' => 'Boolean',
-  ];
-
-  private static $defaults = [
-    'Active' => 1
   ];
 
   private static $owns = [

@@ -21,7 +21,10 @@ class AttributeSet extends DataObject
   ];
 
   private static $many_many_extraFields = [
-    'Attributes' => ['Sort' => 'Int']
+    'Attributes' => [
+      'Sort' => 'Int',
+      'Active' => 'Boolean'
+    ]
   ];
 
   public function getCMSFields()
@@ -43,5 +46,10 @@ class AttributeSet extends DataObject
       return $existing;
     }
     return AttributeSet::create($input);
+  }
+
+  public function getActiveAttributes()
+  {
+    return $this->Attributes()->filter('Active', true);
   }
 }
