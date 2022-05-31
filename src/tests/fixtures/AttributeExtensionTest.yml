@@ -1,0 +1,5 @@
+TractorCow\Fluent\Model\Locale:
+  English:
+    Locale: "en_GB"
+  Swedish:
+    Locale: "sv_SE"
