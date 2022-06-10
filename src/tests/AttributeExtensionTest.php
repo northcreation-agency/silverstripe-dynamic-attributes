@@ -36,7 +36,40 @@ class AttributeExtensionTest extends SapphireTest
     $attribute2->delete();
   }
 
-  public function testGetSortedAttributes()
+  public function testGetSortedAttributesReturnsSorted()
+  {
+    $attributeSet = AttributeSet::create();
+    $attribute1 = Attribute::create();
+    $attribute2 = Attribute::create();
+    $attributeSet->Attributes()->add($attribute1);
+    $attributeSet->Attributes()->add($attribute2);
+    $attributeSet->write();
+
+    $object = AttributeHolder::create();
+    $object->AttributeSetID = $attributeSet->ID;
+    $object->write();
+    $link1 = AttributeLink::get()->filter(['AttributeID' => $attribute1->ID])->first();
+    $link2 = AttributeLink::get()->filter(['AttributeID' => $attribute2->ID])->first();
+
+    $link1->Sort = 1;
+    $link2->Sort = 2;
+
+    $link1->write();
+    $link2->write();
+
+    $this->assertEquals([$attribute1->ID, $attribute2->ID], $object->getSortedAttributes()->column('ID'));
+
+
+    $link1->Sort = 2;
+    $link2->Sort = 1;
+
+    $link1->write();
+    $link2->write();
+
+    $this->assertEquals([$attribute2->ID, $attribute1->ID], $object->getSortedAttributes()->column('ID'));
+  }
+
+  public function testGetSortedAttributeValues()
   {
     $attributeSet = AttributeSet::create();
     $attribute1 = Attribute::create();

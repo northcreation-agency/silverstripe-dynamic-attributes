@@ -32,6 +32,13 @@ class AttributeExtension extends DataExtension
     return $attributes;
   }
 
+  public function getSortedAttributes()
+  {
+    $attributes = $this->owner->getAttributes()
+      ->sort("Sort", "ASC");
+    return $attributes;
+  }
+
   public function getSortedAttributeValues()
   {
     $attributeSet = $this->owner->AttributeSet();
