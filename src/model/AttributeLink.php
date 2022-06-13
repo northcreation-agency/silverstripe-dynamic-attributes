@@ -21,4 +21,15 @@ class AttributeLink extends DataObject
   private static $defaults = [
     'Active' => true,
   ];
+
+  public function onBeforeWrite()
+  {
+    parent::onBeforeWrite();
+    if (!$this->exists()) {
+      $existing = AttributeLink::get()->filter(['AttributeSetID' => $this->AttributeSetID, 'Active' => 1])->sort('Sort', 'DESC')->first();
+      if ($existing) {
+        $this->Sort = $existing->Sort + 1;
+      }
+    }
+  }
 }

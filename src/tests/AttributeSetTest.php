@@ -41,4 +41,53 @@ class AttributeSetTest extends SapphireTest
     $attributeSet->delete();
     $attribute->delete();
   }
+
+  public function testAutomaticSort()
+  {
+    $attributeSet = AttributeSet::create();
+    $attributeSet->write();
+
+    $attribute = Attribute::create();
+    $attribute->write();
+
+    $attribute2 = Attribute::create();
+    $attribute2->write();
+    $attributeSet->Attributes()->addMany([$attribute, $attribute2]);
+
+    $attributeSet->write();
+    $attributeSet = AttributeSet::get()->filter('ID', $attributeSet->ID)->first();
+
+    $links = AttributeLink::get()->filter(['AttributeSetID' =>  $attributeSet->ID])->sort('Sort', 'ASC')->column('Sort');
+    $this->assertEquals([0, 1], $links);
+
+    $attribute->delete();
+    $attribute2->delete();
+    $attributeSet->delete();
+  }
+
+  public function testAutmaticSortIgnoresInactiveAttributes()
+  {
+    $attributeSet = AttributeSet::create();
+    $attributeSet->write();
+
+    $attribute = Attribute::create();
+    $attribute->write();
+
+    $attribute2 = Attribute::create();
+    $attribute2->write();
+    $attributeSet->Attributes()->addMany([$attribute, $attribute2]);
+
+    $attributeSet->write();
+    $attributeSet = AttributeSet::get()->filter('ID', $attributeSet->ID)->first();
+
+    $link = AttributeLink::get()->filter(['AttributeSetID' =>  $attributeSet->ID])->sort('Sort', 'DESC')->first();
+    $link->Active = false;
+    $link->write();
+
+    $attribute3 = Attribute::create();
+    $attribute3->write();
+    $attributeSet->Attributes()->add($attribute3);
+    $links = AttributeLink::get()->filter(['AttributeSetID' =>  $attributeSet->ID])->sort('Sort', 'ASC')->column('Sort');
+    $this->assertEquals([0, 1, 1], $links);
+  }
 }
