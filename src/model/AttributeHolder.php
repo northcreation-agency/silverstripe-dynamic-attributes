@@ -3,7 +3,6 @@
 namespace NorthCreationAgency\DynamicAttributes;
 
 use SilverStripe\ORM\DataObject;
-use SilverStripe\Forms\FieldList;
 
 class AttributeHolder extends DataObject
 {
