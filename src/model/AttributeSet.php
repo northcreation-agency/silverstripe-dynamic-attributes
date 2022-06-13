@@ -70,7 +70,7 @@ class AttributeSet extends DataObject
         }
       ),
       'Key' => array(
-        'title' => 'InRiver Field Key',
+        'title' => 'Key',
         'callback' => function ($record, $column, $grid) {
           return TextField::create($column);
         }
