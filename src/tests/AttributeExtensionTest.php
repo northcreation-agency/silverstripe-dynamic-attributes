@@ -116,4 +116,53 @@ class AttributeExtensionTest extends SapphireTest
     $link1->delete();
     $link2->delete();
   }
+
+  public function testGetSortedAttributeValuesNotReturnsActive()
+  {
+    $attributeSet = AttributeSet::create();
+    $attribute1 = Attribute::create();
+    $attribute2 = Attribute::create();
+    $attributeSet->Attributes()->add($attribute1);
+    $attributeSet->Attributes()->add($attribute2);
+    $attributeSet->write();
+
+    $object = AttributeHolder::create();
+    $object->AttributeSetID = $attributeSet->ID;
+    $object->write();
+
+    $value1 = AttributeValue::create();
+    $value2 = AttributeValue::create();
+    $value1->AttributeID = $attribute1->ID;
+    $value2->AttributeID = $attribute2->ID;
+    $object->write();
+
+    $object->AttributeValues()->add($value1);
+    $object->AttributeValues()->add($value2);
+    $value1->write();
+    $value2->write();
+
+    $object->write();
+    $attributeSet->write();
+
+    $this->assertEquals([$value1->ID, $value2->ID], $object->getSortedAttributeValues()->column('ID'));
+
+    $link1 = AttributeLink::get()->filter(['AttributeID' => $attribute1->ID])->first();
+    $link2 = AttributeLink::get()->filter(['AttributeID' => $attribute2->ID])->first();
+
+    $link1->Active = 1;
+    $link2->Active = 0;
+
+    $link1->write();
+    $link2->write();
+
+    $this->assertEquals([$value1->ID], $object->getSortedAttributeValues()->column('ID'));
+    $this->assertEquals([$value1->ID, $value2->ID], $object->getSortedAttributeValues(false)->column('ID'));
+
+    $object->delete();
+    $attributeSet->delete();
+    $attribute1->delete();
+    $attribute2->delete();
+    $link1->delete();
+    $link2->delete();
+  }
 }
