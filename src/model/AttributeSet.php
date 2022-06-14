@@ -62,6 +62,7 @@ class AttributeSet extends DataObject
 
     /** @var GridFieldEditableColumns */
     $columns = $cnf->getComponentByType(GridFieldEditableColumns::class);
+
     $columns->setDisplayFields(array(
       'Title' => array(
         'title' => 'Title',
@@ -88,9 +89,14 @@ class AttributeSet extends DataObject
         }
       ),
     ));
+
+    $this->extend('updateDataColumns', $columns);
+
+
     if ($this->Attributes()->count() > 0) {
       $cnf->addComponent(GridFieldOrderableRows::create('Sort'));
     }
+
     return $fields;
   }
 
