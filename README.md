@@ -62,9 +62,9 @@ A lot of functionality will be specific to the project in question, therefore we
 
 When the extension applied to a DataObject, it will add two relations to that Object:
 
-- One AttributeSet, which will be the "model" applied to that DataObject, e.g. "Product - Camera". The idea is that we will be able to manage this model, and in turn all tables or listings that want to display Camera products.
+- has_one: AttributeSet - This is the "model" applied to that DataObject, e.g. "Product - Camera". The idea is that we will be able to manage this model, and in turn all tables or listings that want to display Camera products.
 
-- has_many AttributeValues: These will be the instances of the values. These are currently not added by default, but in a normal setting would be applied/removed in an onBeforeWrite() on the object in question.
+- has_many: AttributeValues - These will be the instances of the values. These are currently not added by default, but in a normal setting would be applied/removed in an onBeforeWrite() on the object in question.
 
 ### Useful methods
 
