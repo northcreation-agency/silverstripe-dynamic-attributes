@@ -9,6 +9,7 @@ NorthCreationAgency\DynamicAttributes\Attribute:
     - 'TractorCow\Fluent\Extension\FluentExtension'
   translate:
     - "Title"
+    - "CustomTitle"
 NorthCreationAgency\DynamicAttributes\AttributeHolder:
   extensions:
     - 'NorthCreationAgency\DynamicAttributes\AttributeExtension'

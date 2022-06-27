@@ -13,6 +13,8 @@ class Attribute extends DataObject
   private static $db = [
     'Key' => 'Varchar',
     'Title' => 'Varchar',
+    'CustomTitle' => 'Varchar',
+    'UseCustomTitle' => 'Varchar',
     'Type' => 'Enum(array("' . AttributeType::Number . '","' . AttributeType::Text . '"), "' . AttributeType::Text . '")',
     'Localized' => 'Boolean',
   ];
