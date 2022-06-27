@@ -2,6 +2,7 @@
 
 namespace NorthCreationAgency\DynamicAttributes;
 
+use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 
@@ -34,9 +35,9 @@ class AttributeExtension extends DataExtension
 
   public function getSortedAttributes()
   {
-    $attributes = $this->owner->getAttributes()
-      ->sort("Sort", "ASC");
-    return $attributes;
+    $attributes = $this->owner->getAttributes();
+    if (!$attributes) return null;
+    return $attributes->sort("Sort", "ASC");
   }
 
   public function getSortedAttributeValues(bool $filterActive = true)
@@ -45,7 +46,7 @@ class AttributeExtension extends DataExtension
     $attributes = $this->owner->getAttributes();
 
     $active = $filterActive ? " AND Active=1" : "";
-    if ($attributes) {
+    if ($attributes && $attributeSet->exists()) {
       $attributeValues = $this->owner->getComponents("AttributeValues")
         ->leftJoin("Nca_Attribute", '"Nca_AttributeValue"."AttributeID"="Nca_Attribute"."ID"')
         ->leftJoin("Nca_AttributeLink_AttributeSet_Attribute", '"Nca_Attribute"."ID"="Nca_AttributeLink_AttributeSet_Attribute"."AttributeID"')

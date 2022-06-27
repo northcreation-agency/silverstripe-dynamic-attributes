@@ -165,4 +165,14 @@ class AttributeExtensionTest extends SapphireTest
     $link1->delete();
     $link2->delete();
   }
+
+  public function testGetSortedAttributeValuesReturnsEmptyWhenNoAttributeSetApplied()
+  {
+    $attributeSet = AttributeSet::create();
+    $attributeSet->write();
+    $object = AttributeHolder::create();
+    $object->write();
+    $attributes = $object->getSortedAttributes();
+    $this->assertTrue($attributes === null);
+  }
 }
