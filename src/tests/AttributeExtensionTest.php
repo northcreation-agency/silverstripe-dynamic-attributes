@@ -4,6 +4,7 @@ namespace NorthCreationAgency\DynamicAttributes;
 
 use SilverStripe\Dev\Debug;
 use SilverStripe\Dev\SapphireTest;
+use SilverStripe\ORM\ArrayList;
 
 class AttributeExtensionTest extends SapphireTest
 {
@@ -166,13 +167,24 @@ class AttributeExtensionTest extends SapphireTest
     $link2->delete();
   }
 
-  public function testGetSortedAttributeValuesReturnsEmptyWhenNoAttributeSetApplied()
+  public function testGetSortedAttributeValuesReturnsEmptyArrayListWhenNoAttributeSetApplied()
   {
     $attributeSet = AttributeSet::create();
     $attributeSet->write();
     $object = AttributeHolder::create();
     $object->write();
     $attributes = $object->getSortedAttributes();
-    $this->assertTrue($attributes === null);
+    $this->assertTrue($attributes instanceof ArrayList);
+  }
+
+  public function testGetAttributesAbleToFilter()
+  {
+    $attributeSet = AttributeSet::create();
+    $attributeSet->write();
+    $object = AttributeHolder::create();
+    $object->write();
+    $attributes = $object->getAttributes();
+    $filtered = $attributes->filter('Key', 'test');
+    $this->assertEquals(0, $filtered->count());
   }
 }
