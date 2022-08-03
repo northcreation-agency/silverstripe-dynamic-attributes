@@ -11,7 +11,7 @@
   ],
   "require": {
     "silverstripe/framework": "^4.0",
-    "tractorcow/silverstripe-fluent": "^5",
+    "tractorcow/silverstripe-fluent": "^5|^6",
     "symbiote/silverstripe-gridfieldextensions": "^3"
   },
   "require-dev": {
