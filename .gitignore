@@ -3,6 +3,7 @@
 !.env.example
 **/vendor/**
 /log
+.phpunit.result.cache
 
 .vscode
 

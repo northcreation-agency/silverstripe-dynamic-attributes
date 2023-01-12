@@ -11,6 +11,9 @@ class Attribute extends DataObject
   private static $table_name = 'Nca_Attribute';
 
   private static $db = [
+    'CustomTitle' => 'Varchar',
+    'Prefix' => 'Varchar',
+    'Suffix' => 'Varchar',
     'Key' => 'Varchar',
     'Title' => 'Varchar',
     'Type' => 'Enum(array("' . AttributeType::Number . '","' . AttributeType::Text . '"), "' . AttributeType::Text . '")',
@@ -19,6 +22,13 @@ class Attribute extends DataObject
 
   private static $owns = [
     'Values',
+  ];
+
+  private static $translate = [
+    'Title',
+    'CustomTitle',
+    'Prefix',
+    'Suffix',
   ];
 
   private static $has_many = [
@@ -38,6 +48,14 @@ class Attribute extends DataObject
     $fields = parent::getCMSFields();
     $fields->removeByName('Key');
     return $fields;
+  }
+
+  public function getTitle()
+  {
+    if ($this->CustomTitle) {
+      return $this->CustomTitle;
+    }
+    return $this->getField('Title');
   }
 
   public function isLocalized()
