@@ -76,12 +76,6 @@ class AttributeSet extends DataObject
           return TextField::create($column);
         }
       ),
-      'Nca_AttributeLink_AttributeSet_Attribute.Sort' => array(
-        'title' => 'Sort Order',
-        'callback' => function ($record, $column, $grid) {
-          return TextField::create($column);
-        }
-      ),
       'Nca_AttributeLink_AttributeSet_Attribute.Active' => array(
         'title' => 'Active',
         'callback' => function ($record, $column, $grid) {
