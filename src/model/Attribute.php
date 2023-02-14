@@ -50,14 +50,6 @@ class Attribute extends DataObject
     return $fields;
   }
 
-  public function getTitle()
-  {
-    if ($this->CustomTitle) {
-      return $this->CustomTitle;
-    }
-    return $this->getField('Title');
-  }
-
   public function isLocalized()
   {
     return $this->Localized;
