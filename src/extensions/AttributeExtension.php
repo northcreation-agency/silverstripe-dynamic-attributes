@@ -41,9 +41,9 @@ class AttributeExtension extends DataExtension
     return $attributes->sort("Sort", "ASC");
   }
 
-  public function getSortedAttributeValues(bool $filterActive = true)
+  public function getSortedAttributeValues(bool $filterActive = true, $attributeSet = null)
   {
-    $attributeSet = $this->owner->AttributeSet();
+    $attributeSet = $attributeSet ?? $this->owner->AttributeSet();
     $attributes = $this->owner->getAttributes();
 
     $active = $filterActive ? " AND Active=1" : "";
