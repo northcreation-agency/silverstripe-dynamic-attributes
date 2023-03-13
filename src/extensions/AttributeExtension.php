@@ -45,17 +45,27 @@ class AttributeExtension extends DataExtension
   {
     $attributeSet = $attributeSet ?? $this->owner->AttributeSet();
     $attributes = $this->owner->getAttributes();
+    $keys = $attributes->column('Key');
+    $keyStatement = sprintf(
+      'IN (%s)',
+      implode(',', array_map(function ($i) {
+        return "'" . $i . "'";
+      }, $keys)),
+    );
 
     $active = $filterActive ? " AND Active=1" : "";
     if ($attributes->count() && $attributeSet->exists()) {
       $attributeValues = $this->owner->getComponents("AttributeValues")
+        ->alterDataQuery(function ($dq, $list) {
+          $dq->addSelectFromTable('Nca_Attribute', ['Key']);
+          return $dq;
+        })
         ->leftJoin("Nca_Attribute", '"Nca_AttributeValue"."AttributeID"="Nca_Attribute"."ID"')
         ->leftJoin("Nca_AttributeLink_AttributeSet_Attribute", '"Nca_Attribute"."ID"="Nca_AttributeLink_AttributeSet_Attribute"."AttributeID"')
-        ->where('"AttributeSetID"=' . $attributeSet->ID . $active . " AND OwnerItemID=" . $this->owner->ID)
+        ->where('Nca_Attribute.Key ' . $keyStatement . $active . " AND OwnerItemID=" . $this->owner->ID)
         ->sort("Sort ASC");
       return $attributeValues;
     }
     return ArrayList::create();
   }
-
 }
