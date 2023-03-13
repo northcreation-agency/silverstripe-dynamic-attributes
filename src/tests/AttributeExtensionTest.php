@@ -75,6 +75,8 @@ class AttributeExtensionTest extends SapphireTest
     $attributeSet = AttributeSet::create();
     $attribute1 = Attribute::create();
     $attribute2 = Attribute::create();
+    $attribute1->Key = 'Att1';
+    $attribute2->Key = 'Att2';
     $attributeSet->Attributes()->add($attribute1);
     $attributeSet->Attributes()->add($attribute2);
     $attributeSet->write();
@@ -123,6 +125,8 @@ class AttributeExtensionTest extends SapphireTest
     $attributeSet = AttributeSet::create();
     $attribute1 = Attribute::create();
     $attribute2 = Attribute::create();
+    $attribute1->Key = 'Att1';
+    $attribute2->Key = 'Att2';
     $attributeSet->Attributes()->add($attribute1);
     $attributeSet->Attributes()->add($attribute2);
     $attributeSet->write();
